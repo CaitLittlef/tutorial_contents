@@ -1,0 +1,1018 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{geopandas\_advanced}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{geopandas-advanced-topics}{%
+\section{GeoPandas: Advanced topics}\label{geopandas-advanced-topics}}
+
+\href{https://github.com/emiliom/}{Emilio Mayorga, University of
+Washington}. 2018-9-9
+
+    \hypertarget{introduction}{%
+\subsection{1. Introduction}\label{introduction}}
+
+    We covered the basics of GeoPandas in the previous episode and notebook.
+Here, we'll extend that introduction to illustrate additional aspects of
+GeoPandas and its interactions with other Python libraries, covering
+fancier mapping, analysis (unitary and binary spatial operators), raster
+zonal stats + GeoPandas.
+
+\textbf{Here are the main sections in this episode / notebook:} - Read
+HydroBASINS for Western Washington from a PostGIS / PostgreSQL
+relational database on the cloud - Dissolve into larger watersheds, and
+reproject - Plot \texttt{choropleth} map based on calculated watershed
+areas - Choropleth map as an interactive map with folium - Spatial join,
+\texttt{sjoin}, of polygons on points - rasterstats: ``zonal''
+statistics from polygons on rasters
+
+    \hypertarget{set-up-packages-and-data-file-path}{%
+\subsection{2. Set up packages and data file
+path}\label{set-up-packages-and-data-file-path}}
+
+We'll use these throughout the rest of the tutorial.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        
+        \PY{k+kn}{from} \PY{n+nn}{\PYZus{}\PYZus{}future\PYZus{}\PYZus{}} \PY{k}{import} \PY{p}{(}\PY{n}{absolute\PYZus{}import}\PY{p}{,} \PY{n}{division}\PY{p}{,} \PY{n}{print\PYZus{}function}\PY{p}{)}
+        \PY{k+kn}{import} \PY{n+nn}{os}
+        \PY{k+kn}{import} \PY{n+nn}{json}
+        \PY{k+kn}{import} \PY{n+nn}{psycopg2}
+        
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib} \PY{k}{as} \PY{n+nn}{mpl}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        
+        \PY{k+kn}{from} \PY{n+nn}{shapely}\PY{n+nn}{.}\PY{n+nn}{geometry} \PY{k}{import} \PY{n}{Point}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{geopandas} \PY{k}{as} \PY{n+nn}{gpd}
+        \PY{k+kn}{from} \PY{n+nn}{geopandas} \PY{k}{import} \PY{n}{GeoSeries}\PY{p}{,} \PY{n}{GeoDataFrame}
+        
+        \PY{n}{data\PYZus{}pth} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{../data}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{mpl}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}version\PYZus{}\PYZus{}}\PY{p}{,} \PY{n}{pd}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}version\PYZus{}\PYZus{}}\PY{p}{,} \PY{n}{gpd}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}version\PYZus{}\PYZus{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:} ('2.2.2', '0.23.4', '0.4.0')
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{data\PYZus{}pth}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{db.json}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+            \PY{n}{db\PYZus{}conn\PYZus{}dict} \PY{o}{=} \PY{n}{json}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{read-hydrobasins-north-america-dataset-extracting-western-washington}{%
+\subsection{3. Read HydroBASINS North America dataset, extracting
+Western
+Washington}\label{read-hydrobasins-north-america-dataset-extracting-western-washington}}
+
+Read \href{http://hydrosheds.org/page/hydrobasins}{HydroBASINS}
+``all-levels'' (lev00) hierarchical watersheds dataset for North America
+and the Caribbean (\texttt{hybas\_na\_lev00\_v1c}), from Amazon Cloud
+PostgreSQL/PostGIS database. \textbf{Watersheds in the dataset are at
+the finest (highest resolution) ``Pfastetter'' hierarchical level, level
+12.} HydroBASINS dataset technical documentation is
+\href{http://hydrosheds.org/images/inpages/HydroBASINS_TechDoc_v1c.pdf}{here}.
+
+\texttt{read\_postgis} is called as before, except now we'll apply a SQL
+filter (server side) to the PostGIS dataset to select only the
+Pfastetter level-4 watershed with code 7831:
+\texttt{WHERE\ pfaf\_4\ =\ 7831}. This is \textbf{most of Western
+Washington.} Watershed polygons will still be read at their original
+level 12 resolution.
+
+For a more in-depth look at interacting with spatial relational
+databases, see the eScience Institute tutorial
+\href{https://uwescience.github.io/SQL-geospatial-tutorial/}{Introduction
+to SQL and Geospatial Data Processing}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{conn} \PY{o}{=} \PY{n}{psycopg2}\PY{o}{.}\PY{n}{connect}\PY{p}{(}\PY{o}{*}\PY{o}{*}\PY{n}{db\PYZus{}conn\PYZus{}dict}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{hydrobas\PYZus{}ww} \PY{o}{=} \PY{n}{gpd}\PY{o}{.}\PY{n}{read\PYZus{}postgis}\PY{p}{(}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SELECT * FROM hybas\PYZus{}na\PYZus{}lev00\PYZus{}v1c WHERE pfaf\PYZus{}4 = 7831}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{conn}\PY{p}{,} 
+            \PY{n}{geom\PYZus{}col}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{polygongeom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{n}{coerce\PYZus{}float}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{conn}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{hydrobas\PYZus{}ww}\PY{o}{.}\PY{n}{crs}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} \{'init': 'epsg:4326'\}
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{hydrobas\PYZus{}ww}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} 413
+\end{Verbatim}
+            
+    413 polygon features returned. Let's examine the attributes available,
+using the first feature as an example.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{hydrobas\PYZus{}ww}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} gid                                                        19945
+        hybas\_id                                             7.00001e+09
+        next\_down                                                      0
+        next\_sink                                            7.00001e+09
+        main\_bas                                             7.00001e+09
+        dist\_sink                                                      0
+        dist\_main                                                      0
+        sub\_area                                                   135.4
+        up\_area                                                    135.4
+        endo                                                           0
+        coast                                                          0
+        order                                                          1
+        sort                                                       19945
+        pfaf\_1                                                         7
+        pfaf\_2                                                        78
+        pfaf\_3                                                       783
+        pfaf\_4                                                      7831
+        pfaf\_5                                                     78310
+        pfaf\_6                                                    783101
+        pfaf\_7                                                   7831010
+        pfaf\_8                                                  78310101
+        pfaf\_9                                                 783101010
+        pfaf\_10                                              7.83101e+09
+        pfaf\_11                                              7.83101e+10
+        pfaf\_12                                              7.83101e+11
+        polygongeom    (POLYGON ((-123.35 46.36666666666669, -123.349{\ldots}
+        Name: 0, dtype: object
+\end{Verbatim}
+            
+    \textbf{Plot a categorical map with coloring based on the aggregating
+column \texttt{pfaf\_7}.} Watershed \emph{boundaries} are at the
+high-resolution Pfastetter level 12.\\
+Note: pick a color map (\texttt{cmap}) appropriate for your data.
+\href{https://matplotlib.org/tutorials/colors/colormaps.html}{Get to
+know the matplotlib color maps.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{hydrobas\PYZus{}ww}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{column}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pfaf\PYZus{}7}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tab20}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{categorical}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{rename-the-geodataframe-geometry-column-from-polygongeom-to-geometry-to-avoid-issues-with-other-packages}{%
+\subsubsection{\texorpdfstring{Rename the GeoDataFrame geometry column
+from \texttt{polygongeom} to \texttt{geometry} to avoid issues with
+other
+packages}{Rename the GeoDataFrame geometry column from polygongeom to geometry to avoid issues with other packages}}\label{rename-the-geodataframe-geometry-column-from-polygongeom-to-geometry-to-avoid-issues-with-other-packages}}
+
+Unfortunately, \texttt{folium} choropleth and \texttt{rasterstats}
+(demonstrated below) require the geometry column to be named
+``geometry''. So, we'll rename it here first.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{hydrobas\PYZus{}ww} \PY{o}{=} \PY{n}{hydrobas\PYZus{}ww}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{polygongeom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{geometry}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{hydrobas\PYZus{}ww}\PY{o}{.}\PY{n}{\PYZus{}geometry\PYZus{}column\PYZus{}name} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{geometry}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+
+    \hypertarget{dissolve-into-larger-watersheds-and-reproject}{%
+\subsection{4. Dissolve into larger watersheds, and
+reproject}\label{dissolve-into-larger-watersheds-and-reproject}}
+
+    \hypertarget{dissolve-source-polygons-into-larger-watersheds-based-on-attribute-values}{%
+\subsubsection{Dissolve source polygons into larger watersheds based on
+attribute
+values}\label{dissolve-source-polygons-into-larger-watersheds-based-on-attribute-values}}
+
+Apply GeoDataFrame
+\href{http://geopandas.org/aggregation_with_dissolve.html}{dissolve}
+aggregation method (implemented from lower level \texttt{shapely}
+operators) on level-7 Pfastetter codes (\texttt{pfaf\_7}) shown in the
+plot above. Aggregate attributes, retaining only \texttt{pfaf\_7} and
+\texttt{pfaf\_6} (plus \texttt{geometry}, of course). This operation
+results in only 17 polygons, from the original 413.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{cols} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pfaf\PYZus{}6}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pfaf\PYZus{}7}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{geometry}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{hydrobas\PYZus{}ww\PYZus{}p7} \PY{o}{=} \PY{n}{hydrobas\PYZus{}ww}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{dissolve}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pfaf\PYZus{}7}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{aggfunc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{first}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{as\PYZus{}index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n+nb}{len}\PY{p}{(}\PY{n}{hydrobas\PYZus{}ww\PYZus{}p7}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} 17
+\end{Verbatim}
+            
+    Let's examine some of the features.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{hydrobas\PYZus{}ww\PYZus{}p7}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:}     pfaf\_7                                           geometry  pfaf\_6
+         0  7831010  (POLYGON ((-123.4666666666666 46.2666666666666{\ldots}  783101
+         1  7831020  POLYGON ((-123.1791666666666 46.33333333333336{\ldots}  783102
+         2  7831031  (POLYGON ((-123.9597222222222 46.9666666666667{\ldots}  783103
+         3  7831032  POLYGON ((-123.8583333333333 47.39583333333336{\ldots}  783103
+         4  7831033  POLYGON ((-124.3 47.34583333333336, -124.30221{\ldots}  783103
+\end{Verbatim}
+            
+    Plot the results. Looks like the previous plot, except the polygon
+boundaries are now the pfaf\_7 watersheds.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{hydrobas\PYZus{}ww\PYZus{}p7}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{column}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pfaf\PYZus{}7}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tab20}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{categorical}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{white}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                             \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{\emph{NOTE/WATCH:}}\\
+\textbf{Beware that \texttt{dissolve} may fail if there are ``invalid''
+geometries.} This code is based on a GeoDataFrame examined in the
+previous, intro notebook. The 6 geometries/points reported are invalid
+(and are reported by the \texttt{is\_valid()} method). This dissolve
+statement does work, though.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seas_grp }\OperatorTok{=}\NormalTok{ seas[[}\StringTok{'oceans'}\NormalTok{, }\StringTok{'geometry'}\NormalTok{]]}
+\NormalTok{seas_oceans_diss }\OperatorTok{=}\NormalTok{ seas_grp[seas_grp.geometry.is_valid].dissolve(by}\OperatorTok{=}\StringTok{'oceans'}\NormalTok{)}
+
+\NormalTok{Ring Self}\OperatorTok{-}\NormalTok{intersection at }\KeywordTok{or}\NormalTok{ near point }\FloatTok{10.407218181818182} \FloatTok{54.821390909090908}
+\NormalTok{Self}\OperatorTok{-}\NormalTok{intersection at }\KeywordTok{or}\NormalTok{ near point }\FloatTok{-79.365827272727287} \FloatTok{76.296645454545455}
+\NormalTok{Ring Self}\OperatorTok{-}\NormalTok{intersection at }\KeywordTok{or}\NormalTok{ near point }\FloatTok{10.979445510225332} \FloatTok{54.380555030408686}
+\NormalTok{Ring Self}\OperatorTok{-}\NormalTok{intersection at }\KeywordTok{or}\NormalTok{ near point }\FloatTok{133.61550925464189} \FloatTok{-4.3005540903175188}
+\NormalTok{Ring Self}\OperatorTok{-}\NormalTok{intersection at }\KeywordTok{or}\NormalTok{ near point }\FloatTok{121.91067196634913} \FloatTok{-5.0593090510592447}
+\NormalTok{Ring Self}\OperatorTok{-}\NormalTok{intersection at }\KeywordTok{or}\NormalTok{ near point }\FloatTok{115.29553592754269} \FloatTok{-7.0082630551828515}
+\end{Highlighting}
+\end{Shaded}
+
+    \hypertarget{reproject-transform-to-wa-state-plane-south-epsg2927}{%
+\subsubsection{Reproject (transform) to WA State Plane South,
+epsg:2927}\label{reproject-transform-to-wa-state-plane-south-epsg2927}}
+
+Partly so we can calculate polygon areas in linear units, not geodetic
+degrees. But also because that's the projection used by most state and
+local governments in Washington. - http://epsg.io/2927 -
+http://spatialreference.org/ref/epsg/2927/ -
+\href{http://www.epsg-registry.org/report.htm?type=selection\&entity=urn:ogc:def:crs:EPSG::2927\&reportDetail=short\&style=urn:uuid:report-style:default-with-code\&style_name=OGP\%20Default\%20With\%20Code\&title=EPSG:2927}{Report
+from http://www.epsg-registry.org}
+
+    No need to go to a web site to learn more about what \texttt{epsg:2927}
+is. Use \texttt{pyepsg}, which issues queries to http://epsg.io web
+services.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{k+kn}{import} \PY{n+nn}{pyepsg}
+\end{Verbatim}
+
+
+    Extract the epsg code from the string returned by
+\texttt{crs{[}\textquotesingle{}init\textquotesingle{}{]}}, then query
+epsg \texttt{2927}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{hydrobas\PYZus{}ww\PYZus{}p7\PYZus{}epsg\PYZus{}str} \PY{o}{=} \PY{n}{hydrobas\PYZus{}ww\PYZus{}p7}\PY{o}{.}\PY{n}{crs}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{init}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{pyepsg}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{n}{hydrobas\PYZus{}ww\PYZus{}p7\PYZus{}epsg\PYZus{}str}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} <GeodeticCRS: 4326, WGS 84>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{pyepsg}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2927}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} <ProjectedCRS: 2927, NAD83(HARN) / Washington South (ftUS)>
+\end{Verbatim}
+            
+    \textbf{Apply the crs transformation (reprojection)} using
+\texttt{to\_crs} method.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{hydrobas\PYZus{}ww\PYZus{}p7\PYZus{}wasp} \PY{o}{=} \PY{n}{hydrobas\PYZus{}ww\PYZus{}p7}\PY{o}{.}\PY{n}{to\PYZus{}crs}\PY{p}{(}\PY{n}{epsg}\PY{o}{=}\PY{l+m+mi}{2927}\PY{p}{)}
+\end{Verbatim}
+
+
+    \textbf{Plot the reprojected map.} Note that, being in a planar project
+(not geodetic), the shape looks different compared to the previous map.
+More ``normal''. And the axes are now in \texttt{feet} relative to some
+origin.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{hydrobas\PYZus{}ww\PYZus{}p7\PYZus{}wasp}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{column}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pfaf\PYZus{}7}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tab20}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{categorical}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{white}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                  \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{plot-choropleth-map-based-on-calculated-watershed-areas}{%
+\subsection{\texorpdfstring{5. Plot \texttt{choropleth} map based on
+calculated watershed
+areas}{5. Plot choropleth map based on calculated watershed areas}}\label{plot-choropleth-map-based-on-calculated-watershed-areas}}
+
+As the projection is in \texttt{feet}, auto-calculated polygon areas
+will be in feet2. So let's convert to miles2 first (why not!). We'll add
+a new column to the GeoDataFrame.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{hydrobas\PYZus{}ww\PYZus{}p7\PYZus{}wasp}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{area\PYZus{}mi2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{hydrobas\PYZus{}ww\PYZus{}p7\PYZus{}wasp}\PY{o}{.}\PY{n}{geometry}\PY{o}{.}\PY{n}{area} \PY{o}{/} \PY{l+m+mi}{27878400}
+         \PY{n}{hydrobas\PYZus{}ww\PYZus{}p7\PYZus{}wasp}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:}     pfaf\_7                                           geometry  pfaf\_6  \textbackslash{}
+         0  7831010  (POLYGON ((890315.2572612347 354459.8899780738{\ldots}  783101   
+         1  7831020  POLYGON ((963803.8027083561 376154.9965688475,{\ldots}  783102   
+         2  7831031  (POLYGON ((776917.1877152125 614568.383332147,{\ldots}  783103   
+         
+               area\_mi2  
+         0  1375.137396  
+         1  2107.945774  
+         2   528.472846  
+\end{Verbatim}
+            
+    \textbf{\emph{NOTE/FUN:}}\\
+Now you could get the area of a pfaf\_6 watershed via simple Pandas
+DataFrame \texttt{groupby} aggregation (sum).
+
+    Plot the choloropleth, using \texttt{area\_mi2}.
+
+The ``fisher\_jenks'' value segmentation \texttt{scheme} (using 7
+segments, k=7) used is one of the available
+\texttt{pysal.esda.mapclassify.Map\_Classifier} classifiers from the
+powerful \href{http://pysal.org/}{PySAL package} (Python Spatial
+Analysis Library); GeoPandas can use these classifiers if PySAL is
+installed, as it is here. To get the list of classifiers, use:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pysal}
+\BuiltInTok{print}\NormalTok{(pysal.esda.mapclassify.Map_Classifier.__doc__)}
+\end{Highlighting}
+\end{Shaded}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{f}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Watersheds by area (\PYZdl{}mi\PYZca{}2\PYZdl{})}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{hydrobas\PYZus{}ww\PYZus{}p7\PYZus{}wasp}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{column}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{area\PYZus{}mi2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{scheme}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fisher\PYZus{}jenks}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{7}\PY{p}{,} 
+                                  \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{Blues}\PY{p}{,} \PY{n}{legend}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}axis\PYZus{}off}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{equal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/opt/conda/lib/python3.6/site-packages/pysal/\_\_init\_\_.py:65: VisibleDeprecationWarning: PySAL's API will be changed on 2018-12-31. The last release made with this API is version 1.14.4. A preview of the next API version is provided in the `pysal` 2.0 prelease candidate. The API changes and a guide on how to change imports is provided at https://pysal.org/about
+  ), VisibleDeprecationWarning)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_41_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{\emph{NOTE/FUN:}}\\
+Let's stop for a bit to explore on your own, hack with your neighbors,
+ask questions.
+
+    \hypertarget{choropleth-map-as-an-interactive-map-with-folium}{%
+\subsection{6. Choropleth map as an interactive map with
+folium}\label{choropleth-map-as-an-interactive-map-with-folium}}
+
+\href{https://github.com/python-visualization/folium}{Folium} is very
+cool, specially for use in Jupyter notebooks; or to export into
+stand-alone HTML.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{k+kn}{import} \PY{n+nn}{folium}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{folium}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}version\PYZus{}\PYZus{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} '0.6.0'
+\end{Verbatim}
+            
+    \texttt{m.choropleth} internally splits the geometry from the other
+attributes in \texttt{hydrobas\_ww\_p7\_wasp}, and rejoins them based on
+the key \texttt{pfaf\_7}. \texttt{key\_on} uses an attribute reference
+derived from GeoJSON representations; this is awkward, and hopefully
+will be simplified in future folium implementations.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{hydrobas\PYZus{}ww\PYZus{}p7\PYZus{}wasp}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:}     pfaf\_7                                           geometry  pfaf\_6  \textbackslash{}
+         0  7831010  (POLYGON ((890315.2572612347 354459.8899780738{\ldots}  783101   
+         1  7831020  POLYGON ((963803.8027083561 376154.9965688475,{\ldots}  783102   
+         2  7831031  (POLYGON ((776917.1877152125 614568.383332147,{\ldots}  783103   
+         3  7831032  POLYGON ((808869.5755557655 769864.5311527567,{\ldots}  783103   
+         4  7831033  POLYGON ((698711.1808079176 756609.8674803674,{\ldots}  783103   
+         
+               area\_mi2  
+         0  1375.137396  
+         1  2107.945774  
+         2   528.472846  
+         3   441.528065  
+         4   106.456891  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{m} \PY{o}{=} \PY{n}{folium}\PY{o}{.}\PY{n}{Map}\PY{p}{(}\PY{n}{location}\PY{o}{=}\PY{p}{[}\PY{l+m+mf}{47.8}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{122.5}\PY{p}{]}\PY{p}{,} \PY{n}{zoom\PYZus{}start}\PY{o}{=}\PY{l+m+mi}{7}\PY{p}{,} \PY{n}{tiles}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cartodbpositron}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{m}\PY{o}{.}\PY{n}{choropleth}\PY{p}{(}
+             \PY{n}{geo\PYZus{}data}\PY{o}{=}\PY{n}{hydrobas\PYZus{}ww\PYZus{}p7\PYZus{}wasp}\PY{p}{,}
+             \PY{n}{data}\PY{o}{=}\PY{n}{hydrobas\PYZus{}ww\PYZus{}p7\PYZus{}wasp}\PY{p}{,}
+             \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pfaf\PYZus{}7}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{area\PYZus{}mi2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+             \PY{n}{key\PYZus{}on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{feature.properties.pfaf\PYZus{}7}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{n}{legend\PYZus{}name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Area (sq mi)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+             \PY{n}{fill\PYZus{}color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{YlGn}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{n}{fill\PYZus{}opacity}\PY{o}{=}\PY{l+m+mf}{0.4}\PY{p}{,}
+             \PY{n}{highlight}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{n}{m}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} <folium.folium.Map at 0x7f5819bc9208>
+\end{Verbatim}
+            
+    This map is interactive, so play with it (zoom and pan). There is a lot
+more to explore in Folium! This is just a teaser.
+
+    \hypertarget{spatial-join-sjoin-of-polygons-on-points}{%
+\subsection{\texorpdfstring{7. Spatial join, \texttt{sjoin}, of polygons
+on
+points}{7. Spatial join, sjoin, of polygons on points}}\label{spatial-join-sjoin-of-polygons-on-points}}
+
+We'll use an old, local snapshot of NANOOS coastal and marine monitoring
+stations in the Pacific NW, from the
+\href{http://nvs.nanoos.org/Explorer}{NANOOS Visualization System (NVS)
+Data Explorer}. While many stations are moorings on marine waters, some
+are inshore or in tidal shores and will overlap the watershed
+boundaries. The point file is in the
+\href{http://www.geopackage.org}{GeoPackage} format, an OGC format
+implemented in SQLite.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{nanoosstations\PYZus{}gdf} \PY{o}{=} \PY{n}{gpd}\PY{o}{.}\PY{n}{read\PYZus{}file}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{data\PYZus{}pth}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nanoos\PYZus{}nvs.gpkg}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{len}\PY{p}{(}\PY{n}{nanoosstations\PYZus{}gdf}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{nanoosstations\PYZus{}gdf}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    Points are on the coasts of the Pacific NW (BC, WA, OR) and out in the
+open ocean.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{nanoosstations\PYZus{}gdf}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{markersize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \textbf{Apply ``inner'' spatial join with the \texttt{sjoin} operator}.
+An inner join will retain only overlapping features. Then plot as a map
+overlay on top of \texttt{hydrobas\_ww\_p7}, categorizing (coloring)
+each point by the \texttt{pfaf\_6} watershed it's in.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{nanoossta\PYZus{}hydrobas\PYZus{}ww\PYZus{}gdf} \PY{o}{=} \PY{n}{gpd}\PY{o}{.}\PY{n}{sjoin}\PY{p}{(}\PY{n}{nanoosstations\PYZus{}gdf}\PY{p}{,} \PY{n}{hydrobas\PYZus{}ww\PYZus{}p7}\PY{p}{,} \PY{n}{how}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inner}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{len}\PY{p}{(}\PY{n}{nanoossta\PYZus{}hydrobas\PYZus{}ww\PYZus{}gdf}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{f}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}axis\PYZus{}off}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{equal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{hydrobas\PYZus{}ww\PYZus{}p7}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Greys\PYZus{}r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{nanoossta\PYZus{}hydrobas\PYZus{}ww\PYZus{}gdf}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{column}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pfaf\PYZus{}6}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{markersize}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{,} 
+                                       \PY{n}{categorical}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{legend}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \hypertarget{rasterstats-zonal-statistics-from-polygons-on-rasters}{%
+\subsection{8. rasterstats: ``zonal'' statistics from polygons on
+rasters}\label{rasterstats-zonal-statistics-from-polygons-on-rasters}}
+
+We'll end by mixing features from a GeoDataFrame with a raster, applying
+zonal statistics using the cool and light weight
+\href{https://github.com/perrygeo/python-rasterstats}{rasterstats}
+package.
+
+    Monthly Juy long-term climatology precipitation. The original monthly
+time series data are from the \href{http://prism.oregonstate.edu}{PRISM
+Climate Group}; the monthly climatology and Pacific NW clip were created
+by your truly and Don Setiawan for the \href{http://bigcz.org}{BiGCZ
+project}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{ppt\PYZus{}july\PYZus{}tif\PYZus{}pth} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{data\PYZus{}pth}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{prism\PYZus{}precipitation\PYZus{}july\PYZus{}climatology.tif}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{rasterio}{%
+\subsubsection{rasterio}\label{rasterio}}
+
+    \texttt{rasterstas} uses
+\href{https://mapbox.github.io/rasterio}{rasterio} to read rasters (and
+\texttt{fiona} to read vector datasets), so we'll first do a quick
+exploration of rasterio.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{import} \PY{n+nn}{rasterio}
+        \PY{k+kn}{import} \PY{n+nn}{rasterio}\PY{n+nn}{.}\PY{n+nn}{plot} \PY{k}{as} \PY{n+nn}{rioplot}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{rasterio}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}version\PYZus{}\PYZus{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{ppt\PYZus{}july} \PY{o}{=} \PY{n}{rasterio}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{n}{ppt\PYZus{}july\PYZus{}tif\PYZus{}pth}\PY{p}{)}
+        \PY{n}{ppt\PYZus{}july}
+\end{Verbatim}
+
+
+    Examine the metadata read from the raster file (we can confirm CRS is
+epsg:4326), then plot the raster.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{ppt\PYZus{}july}\PY{o}{.}\PY{n}{meta}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{rioplot}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{n}{ppt\PYZus{}july}\PY{p}{,} \PY{n}{with\PYZus{}bounds}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{Blues}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \hypertarget{apply-rasterstas-zonal_stats}{%
+\subsubsection{\texorpdfstring{Apply rasterstas
+\texttt{zonal\_stats}}{Apply rasterstas zonal\_stats}}\label{apply-rasterstas-zonal_stats}}
+
+    Apply \texttt{zonal\_stats} from \texttt{rasterstats} package. Can pass
+a \texttt{GeoDataFrame} directly (instead of the file path to a GIS
+file) because it implements our old friend, the
+\texttt{\_\_geo\_interface\_\_} method. For the raster, we pass its file
+path.
+
+\texttt{zonal\_stats} returns a geojson with the original properties
+plus the zonal statistics.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{import} \PY{n+nn}{rasterstats} \PY{k}{as} \PY{n+nn}{rs}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{rs}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}version\PYZus{}\PYZus{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{zonal\PYZus{}ppt\PYZus{}gjson} \PY{o}{=} \PY{n}{rs}\PY{o}{.}\PY{n}{zonal\PYZus{}stats}\PY{p}{(}\PY{n}{hydrobas\PYZus{}ww\PYZus{}p7}\PY{p}{,} \PY{n}{ppt\PYZus{}july\PYZus{}tif\PYZus{}pth}\PY{p}{,} \PY{n}{prefix}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pptjuly\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                         \PY{n}{geojson\PYZus{}out}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n+nb}{type}\PY{p}{(}\PY{n}{zonal\PYZus{}ppt\PYZus{}gjson}\PY{p}{)}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{zonal\PYZus{}ppt\PYZus{}gjson}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{zonal\PYZus{}ppt\PYZus{}gdf} \PY{o}{=} \PY{n}{GeoDataFrame}\PY{o}{.}\PY{n}{from\PYZus{}features}\PY{p}{(}\PY{n}{zonal\PYZus{}ppt\PYZus{}gjson}\PY{p}{)}
+        \PY{n}{zonal\PYZus{}ppt\PYZus{}gdf}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{and-finally-a-choropleth-map-of-july-precipitation-by-watershed-with-a-good-bit-of-plot-tweaking.}{%
+\paragraph{And finally, a choropleth map of July precipitation by
+watershed! With a good bit of plot
+tweaking.}\label{and-finally-a-choropleth-map-of-july-precipitation-by-watershed-with-a-good-bit-of-plot-tweaking.}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{f}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean July precipitation (\PYZdl{}mm/month\PYZdl{}) by watershed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{zonal\PYZus{}ppt\PYZus{}gdf}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{,} \PY{n}{column}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pptjuly\PYZus{}mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{scheme}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Equal\PYZus{}Interval}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} 
+                           \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{Blues}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                           \PY{n}{legend}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{legend\PYZus{}kwds}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}facecolor}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lightgray}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{equal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \hypertarget{other-resources-tools-and-overlap-with-other-tutorials}{%
+\subsection{9. Other resources, tools, and overlap with other
+tutorials}\label{other-resources-tools-and-overlap-with-other-tutorials}}
+
+\begin{itemize}
+\tightlist
+\item
+  Advanced vector geospatial analytics
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Go over all the analytics that have been wrapped into GeoPandas,
+    including
+    \href{http://geopandas.org/geometric_manipulations.html}{Geometric
+    Manipulations},
+    \href{http://geopandas.org/set_operations.html}{Set-Operations with
+    Overlay},
+    \href{http://geopandas.org/aggregation_with_dissolve.html}{Aggregation
+    with Dissolve} and
+    \href{http://geopandas.org/aggregation_with_dissolve.html}{Merging
+    Data}
+  \item
+    Use \href{http://pysal.org}{PySAL}, the Python Spatial Analysis
+    Library! It's in the conda environment (version 1.14.4). This is a
+    powerful, multi-faceted package. But watch out for the current
+    transition from ``version 1'' to ``version 2''.
+  \end{itemize}
+\item
+  Visualizations
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \href{https://residentmario.github.io/geoplot/index.html}{GeoPlot}
+    makes it easy to generate a variety of useful plots from
+    GeoDataFrames. It's available in the conda environment.
+    \href{http://geopandas.org/gallery/plotting_with_geoplot.html}{Here
+    is a gallery of GeoPlot plots from GeoPandas}
+  \item
+    More spatial visualization options are coming in the
+    \href{https://geohackweek.github.io/visualization/}{Visualization
+    tutorial}. Stay tuned, or look it up now. The mapping packages it'll
+    cover include
+    \href{https://scitools.org.uk/cartopy/docs/latest/}{cartopy},
+    \href{http://geoviews.org/}{GeoViews} and
+    \href{http://python-visualization.github.io/folium/}{Folium} (we
+    only covered a small subset of Folium capabilities, just to give you
+    a taste)
+  \item
+    See the
+    \href{https://github.com/oceanhackweek/ohw2018_tutorials/tree/master/day3/geospatial_and_mapping_tools}{Python
+    mapping libraries tour} from OceanHackWeek 2018 last month.
+  \end{itemize}
+\item
+  Overlap with raster processing
+
+  \begin{itemize}
+  \tightlist
+  \item
+    We illustrated \texttt{rasterstats} and
+    \href{https://rasterio.readthedocs.io/en/latest/}{rasterio}.
+    \texttt{rasterio} will be a pretty important component of your
+    raster handling and manipulation toolbox. And it interacts with the
+    GeoJSON-like objects we've examined; for example, see its
+    \href{https://rasterio.readthedocs.io/en/latest/topics/features.html}{features
+    module}.
+  \item
+    \href{https://regionmask.readthedocs.io/}{regionmask} works nicely
+    with GeoDataFrames to support gridded operations, including ones in
+    \texttt{xarray} that you'll see in the
+    \href{https://geohackweek.github.io/nDarrays/}{nDarrays tutorial}
+  \end{itemize}
+\end{itemize}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
